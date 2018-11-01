@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
+import { format } from 'date-fns';
 
 const styles = {
   root: {
     flexGrow: 1,
+    margin: '15px',
   },
   grow: {
     flexGrow: 1,
@@ -22,33 +22,25 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
+  a: {
+    textDecoration: 'none !important',
+  },
   card: {
     maxWidth: 345,
   },
   media: {
     // ⚠️ object-fit is not supported by IE 11.
     objectFit: 'cover',
+    minHeight: '300px'
   },
 };
-const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-  },
-  palette: {
-    primary: blue,
-  },
-});
-
 class NewsCard extends React.Component {
-  state = {
-  };
-
   render() {
     const { classes, post } = this.props;
 
     return (
       <div className={classes.root}>
-        <MuiThemeProvider theme={theme}>
+        <a href={post.url} target="_blank" rel="noopener noreferrer" className={classes.a}>
           <Card className={classes.card}>
             <CardActionArea>
               <CardMedia
@@ -64,20 +56,18 @@ class NewsCard extends React.Component {
                 {post.title}
                 </Typography>
                 <Typography component="p">
-                {post.description}
+                {post.description || post.content}
                 </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="small" color="primary">
-                Share
-              </Button>
-              <Button size="small" color="primary">
-                Learn More
-              </Button>
+              <Chip
+                label={format(post.publishedAt, 'DD.MM.YYYY. HH:mm')}
+                className={classes.chip}
+                color="primary" />
             </CardActions>
           </Card>
-        </MuiThemeProvider>
+        </a>
       </div>
     );
   }

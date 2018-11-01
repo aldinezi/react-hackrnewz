@@ -8,8 +8,8 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import LineStyleIcon from '@material-ui/icons/LineStyle';
+import StarIcon from '@material-ui/icons/Grade';
 
 const styles = {
   list: {
@@ -22,18 +22,31 @@ class SidebarDrawer extends React.Component {
     this.props.toggleDrawer(flag);
   }
 
+  fetchFromRoute(route){
+    console.log(route);
+    this.props.fetchFromRoute(route);
+  }
+
   render() {
     const { classes } = this.props;
 
     const sideList = (
       <div className={classes.list}>
         <List>
-          {['Inbox', 'Starred'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem
+            button
+            key="Featured"
+            onClick={() => this.fetchFromRoute('topHeadlines')}>
+            <ListItemIcon><StarIcon/></ListItemIcon>
+            <ListItemText primary="Featured" />
+          </ListItem>
+          <ListItem
+            button
+            key="Everything"
+            onClick={() => this.fetchFromRoute('everything')}>
+            <ListItemIcon><LineStyleIcon/></ListItemIcon>
+            <ListItemText primary="Everything" />
+          </ListItem>
         </List>
         <Divider />
       </div>
@@ -57,6 +70,7 @@ class SidebarDrawer extends React.Component {
 SidebarDrawer.propTypes = {
   classes: PropTypes.object.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
+  fetchFromRoute: PropTypes.func.isRequired,
   left: PropTypes.bool.isRequired,
 };
 
