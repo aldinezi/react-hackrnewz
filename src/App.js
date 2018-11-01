@@ -32,7 +32,6 @@ const newsRoutes = {
 const apiKey = 'apiKey=5538d8992f5e49658189f457315657ca';
 
 const fetchNews = (route) => {
-  console.log('Axios fetch');
   return axios.get(`https://newsapi.org/v2/${route}?sources=hacker-news&${apiKey}`)
     .then(res => res)
     .catch(error => console.error('Error loading news:\n', error));
