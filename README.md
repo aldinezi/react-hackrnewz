@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-[DEMO on Netlify](https://react-hackernewz.aldinezi.tech/)
+[DEMO on Netlify](https://react-hackernewz.aldinezi.info/)
 
 ## Available Scripts
 
